@@ -4,6 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -16,44 +17,7 @@ import java.time.Duration;
 public class Zadanie1 {
     private WebDriver driver;
 
-    public Zadanie1(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
-    @FindBy(css = "#_desktop_user_info > div > a")
-    WebElement userInfoButton;
-
-    @FindBy(name = "#login-form > section > div:nth-child(2) > div.col-md-6 > input")
-    WebElement emailInput;
-
-    @FindBy(name = "#login-form > section > div:nth-child(3) > div.col-md-6 > div > input")
-    WebElement passwordInput;
-
-    @FindBy(css = "#submit-login")
-    WebElement submitButton;
-
-    @FindBy (id = "address-link")
-    WebElement addAddressButton;
-
-    @FindBy(name = "address1")
-    WebElement addressInput ;
-
-    @FindBy(name = "postcode")
-    WebElement postalCodeInput;
-
-    @FindBy(name = "city")
-    WebElement cityInput;
-
-    @FindBy(name = "id_country")
-    Select countrySelect;
-
-    @FindBy(name = "phone")
-    WebElement phoneNumberInput;
-
-    @FindBy(name = "submitAddress")
-    WebElement saveButton;
-
-    @Given("Opened webpage: https://mystore-testlab.coderslab.pl/index.php")
+    @Given("opened myStore webpage")
     public void beforeEach() {
         System.setProperty("webdriver.edge.driver", "src/test/resources/msedgedriver.exe");
         this.driver = new EdgeDriver();
@@ -63,29 +27,47 @@ public class Zadanie1 {
 
     @When("user is signed in")
     public void login() {
-        userInfoButton.click();
+        WebElement signInButton = driver.findElement(By.cssSelector("#_desktop_user_info > div > a"));
+        signInButton.click();
 
+        WebElement emailInput = driver.findElement(By.cssSelector("#login-form > section > div:nth-child(2) > div.col-md-6 > input"));
         emailInput.sendKeys("randomEmail@gmail.com");
 
+        WebElement passwordInput = driver.findElement(By.cssSelector("#login-form > section > div:nth-child(3) > div.col-md-6 > div > input"));
         passwordInput.sendKeys("Mypassword123");
 
+        WebElement submitButton = driver.findElement(By.cssSelector("#submit-login"));
         submitButton.click();
         //Assertions.assertEquals("Your account has been created.", "Your account has been created.");
     }
     @And("add first address button is clicked")
     public void addAddressButton(){
+
+        WebElement addAddressButton = driver.findElement(By.id("address-link"));
         addAddressButton.click();
     }
-    @And("address form is filled with {word}, {word}, {word}, {word}")
+    @And("^address form is filled with (.*) (.*) (.*) (.*)$")
     public void createNewAddress(String address, String city, String postalCode, String phoneNumber){
+
+        WebElement addressInput = driver.findElement(By.name("address1"));
         addressInput.sendKeys(address);
-        cityInput.sendKeys(city);
+
+        WebElement postalCodeInput = driver.findElement(By.name("postcode"));
         postalCodeInput.sendKeys(postalCode);
+
+        WebElement cityInput = driver.findElement(By.name("city"));
+        cityInput.sendKeys(city);
+
+        Select countrySelect = new Select(driver.findElement(By.name("id_country")));
         countrySelect.selectByIndex(1);
+
+        WebElement phoneNumberInput = driver.findElement(By.name("phone"));
         phoneNumberInput.sendKeys(phoneNumber);
+
     }
     @And("save button is clicked")
     public void clickSaveButton(){
+        WebElement saveButton = driver.findElement(By.cssSelector("#content > div > div > form > footer > button"));
         saveButton.click();
     }
     @Then("success info is displayed")

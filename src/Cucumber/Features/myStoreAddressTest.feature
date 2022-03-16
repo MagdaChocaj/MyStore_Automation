@@ -1,9 +1,10 @@
 Feature: adding an address in myStore
   Scenario Outline: user can add an address to their myStore account
 
-    Given Opened webpage: "https://mystore-testlab.coderslab.pl/index.php"
+    Given opened myStore webpage
+    When user is signed in
     And add first address button is clicked
-    And address form is filled with <address>, <postalCode>, <city>, <phone>
+    And address form is filled with <address> <city> <postalCode> <phone>
     And save button is clicked
     Then success info is displayed
 

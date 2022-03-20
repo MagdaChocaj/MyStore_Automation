@@ -3,10 +3,14 @@ Feature: adding an address in myStore
 
     Given opened myStore webpage
     When user is signed in
-    And add first address button is clicked
+    And add first address button is clicked or addresses button is clicked
     And address form is filled with <address> <city> <postalCode> <phone>
     And save button is clicked
-    Then success info is displayed
+    Then "Address successfully added!" is displayed
+    And address is deleted
+    And user sees "Address successfully deleted!"
+
+
 
     Examples:
     |address          |postalCode    |city           |phone      |

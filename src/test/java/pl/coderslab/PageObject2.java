@@ -21,19 +21,36 @@ public class PageObject2 {
     WebElement hummingbirdPrintedSweater;
 
     Select size = new Select(driver.findElement(By.id("group_1")));
-    size.select
 
     @FindBy(css = "#add-to-cart-or-refresh > div.product-add-to-cart > div > div.add > button")
     WebElement addToCartButton;
 
-    @FindBy(css = "#quantity_wanted");
+    @FindBy(css = "#quantity_wanted")
     WebElement quantity;
 
-    @FindBy("#blockcart-modal > div > div > div.modal-body > div > div.col-md-7 > div > div > a")
+    @FindBy(css = "#blockcart-modal > div > div > div.modal-body > div > div.col-md-7 > div > div > a")
     WebElement checkout;
 
     @FindBy(css = "#main > div > div.cart-grid-right.col-xs-12.col-lg-4 > div.card.cart-summary > div.checkout.cart-detailed-actions.card-block > div > a")
-    WebElement checkout;
+    WebElement checkout2;
 
+    @FindBy (name = "confirm-addresses")
+    WebElement confirmAddressButton;
 
+    @FindBy (name = "confirmDeliveryOption")
+    WebElement confirmDeliveryButton;
+
+    @FindBy(name = "payment-option-1-container")
+    WebElement paymentOption;
+
+    @FindBy(id = "conditions_to_approve[terms-and-conditions]")
+    WebElement termsAndConditions;
+
+    @FindBy(css = "#payment-confirmation > div.ps-shown-by-js > button")
+    WebElement paymentConfirmation;
+
+    //YOUR ORDER IS CONFIRMED
+
+    public void
 }
+

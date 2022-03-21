@@ -1,11 +1,14 @@
 package pl.coderslab;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class PageObject2 {
     private WebDriver driver;
@@ -20,8 +23,6 @@ public class PageObject2 {
     @FindBy(css = "#content > section > div > article:nth-child(2) > div > div.product-description > h3 > a")
     WebElement hummingbirdPrintedSweater;
 
-    Select size = new Select(driver.findElement(By.id("group_1")));
-
     @FindBy(css = "#add-to-cart-or-refresh > div.product-add-to-cart > div > div.add > button")
     WebElement addToCartButton;
 
@@ -29,7 +30,7 @@ public class PageObject2 {
     WebElement quantity;
 
     @FindBy(css = "#blockcart-modal > div > div > div.modal-body > div > div.col-md-7 > div > div > a")
-    WebElement checkout;
+    WebElement checkoutButton;
 
     @FindBy(css = "#main > div > div.cart-grid-right.col-xs-12.col-lg-4 > div.card.cart-summary > div.checkout.cart-detailed-actions.card-block > div > a")
     WebElement checkout2;
@@ -40,7 +41,7 @@ public class PageObject2 {
     @FindBy (name = "confirmDeliveryOption")
     WebElement confirmDeliveryButton;
 
-    @FindBy(name = "payment-option-1-container")
+    @FindBy(css = "#payment-option-1")
     WebElement paymentOption;
 
     @FindBy(id = "conditions_to_approve[terms-and-conditions]")
@@ -51,6 +52,44 @@ public class PageObject2 {
 
     //YOUR ORDER IS CONFIRMED
 
-    public void
+    public void orderPlacement() {
+        myStoreLogo.click();
+
+        hummingbirdPrintedSweater.click();
+
+        Select size = new Select(driver.findElement(By.id("group_1")));
+        size.selectByValue("2");
+
+        quantity.clear();
+        quantity.sendKeys("5");
+
+        addToCartButton.click();
+
+        checkoutButton.click();
+
+        checkout2.click();
+
+        confirmAddressButton.click();
+
+        confirmDeliveryButton.click();
+
+        paymentOption.click();
+
+        termsAndConditions.click();
+
+        paymentConfirmation.click();
+
+    }
+    public void takeAScreenshot() {
+        TakesScreenshot screenshot = (TakesScreenshot)driver;
+        File orderScreenshot = screenshot.getScreenshotAs(OutputType.FILE);
+        try {
+            Files.copy(orderScreenshot.toPath(), Paths.get("C:", "desktop", "test evidence", "order_success_evidence", ".png"));
+        } catch (IOException e) {
+
+            System.out.println("exception");
+        }
+
+    }
 }
 

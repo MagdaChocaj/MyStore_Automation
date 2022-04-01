@@ -16,7 +16,7 @@ public class Zadanie1_steps {
         System.setProperty("webdriver.edge.driver", "src/test/resources/msedgedriver.exe");
         this.driver = new EdgeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(16));
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
         driver.get("https://mystore-testlab.coderslab.pl/index.php");
     }
 
@@ -45,7 +45,8 @@ public class Zadanie1_steps {
 
     @Then("{string} is displayed")
     public void userSees(String message) {
-        Assertions.assertEquals(message, pageObject.getSuccessInfo());
+        message = "Address successfully added!";
+        Assertions.assertTrue(pageObject.getSuccessInfo().equals(message));
 
     }
 
@@ -56,7 +57,8 @@ public class Zadanie1_steps {
     }
     @And("user sees {string}")
     public void deletionMessage(String message){
-        Assertions.assertEquals(message, pageObject.getDeletionInfo() );
+        message = "Address successfully deleted!";
+        Assertions.assertTrue(pageObject.getDeletionInfo().equals(message));
     }
 }
 

@@ -1,6 +1,7 @@
 package pl.coderslab;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -51,13 +52,13 @@ public class PageObject {
     @FindBy (css = "#content > div > div > form > footer > button")
     WebElement saveButton;
 
-    @FindBy(css = ".alert.alert-success")
+    @FindBy(css = "#notifications > div > article")
     WebElement successInformation;
 
     @FindBy (xpath = "/html/body/main/section/div/div/section/section/div[1]/article/div[2]/a[2]")
     WebElement deleteButton;
 
-    @FindBy(css = ".alert.alert-success")
+    @FindBy(css = "#notifications > div > article")
     WebElement deletionSuccessInfo;
 
 
@@ -101,7 +102,13 @@ public class PageObject {
     }
 
     public void clickSaveButton() {
-        saveButton.click();
+
+        try {
+            saveButton.click();
+        } catch (StaleElementReferenceException e) {
+
+        }
+
     }
     public String getSuccessInfo() {
         return successInformation.getText();

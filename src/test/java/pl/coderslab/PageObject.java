@@ -31,7 +31,7 @@ public class PageObject {
     @FindBy(id = "address-link")
     WebElement addAddressButton;
 
-    @FindBy(css = "#addresses-link")
+    @FindBy(css = "#wrapper > div > nav > ol > li:nth-child(3) > a")
     WebElement addressesButton;
 
     @FindBy(css = "#content > div.addresses-footer > a")
@@ -76,14 +76,8 @@ public class PageObject {
     public void addAddress() {
 
         addAddressButton.click();
-    }
-
-    public void addAnotherAddress() {
-
         addressesButton.click();
-
         createNewAddressButton.click();
-
     }
 
     public void createNewAddress(String address, String city, String postalCode, String phoneNumber) {

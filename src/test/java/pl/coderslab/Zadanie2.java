@@ -10,7 +10,7 @@ import java.time.Duration;
 public class Zadanie2 {
     WebDriver driver;
     PageObject pageObject;
-    PageObject2 pageObject2;
+    Zadanie2_steps element;
 
     @BeforeEach
     public void beforeEach() {
@@ -24,9 +24,16 @@ public class Zadanie2 {
     @Test
     public void userIsSignedIn() {
         pageObject = new PageObject(driver);
-        pageObject2 = new PageObject2(driver);
+        element = new Zadanie2_steps(driver);
         pageObject.login();
-        pageObject2.orderPlacement();
-        pageObject2.takeAScreenshot();
+        element.addToCart();
+        element.addAddress();
+        element.orderPlacement();
+        element.takeAScreenshot();
+        element.orderStatus();
+
+
+
     }
+
 }

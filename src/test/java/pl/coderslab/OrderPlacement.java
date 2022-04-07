@@ -13,11 +13,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Zadanie2_steps {
+public class OrderPlacement {
     private WebDriver driver;
     private List<String> priceList;
 
-    public Zadanie2_steps(WebDriver driver) {
+    public OrderPlacement(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -25,7 +25,7 @@ public class Zadanie2_steps {
     @FindBy(css = "#_desktop_logo > a > img")
     WebElement myStoreLogo;
 
-    @FindBy(css = "#content > section > div > article:nth-child(1) > div > div.product-description > h3 > a")
+    @FindBy(css = "#content > section > div > article:nth-child(2) > div > div.product-description > h3 > a")
     WebElement hummingbirdPrintedSweater;
 
     @FindBy(css = "#main > div.row > div:nth-child(2) > div.product-prices > div.product-price.h5.has-discount > div > span.discount.discount-percentage")
@@ -38,22 +38,10 @@ public class Zadanie2_steps {
     WebElement addToCartButton;
 
     @FindBy(css = "#blockcart-modal > div > div > div.modal-body > div > div.col-md-7 > div > div > a")
-    WebElement checkoutButton;
+    WebElement proceedToCheckoutButton;
 
     @FindBy(css = "#main > div > div.cart-grid-right.col-xs-12.col-lg-4 > div.card.cart-summary > div.checkout.cart-detailed-actions.card-block > div > a")
-    WebElement checkout2;
-
-    @FindBy(name = "address1")
-    WebElement addressInput;
-
-    @FindBy(name = "postcode")
-    WebElement postalCodeInput;
-
-    @FindBy(name = "city")
-    WebElement cityInput;
-
-    @FindBy(name = "phone")
-    WebElement phoneInput;
+    WebElement checkoutButton;
 
     @FindBy(name = "confirm-addresses")
     WebElement confirmAddressButton;
@@ -79,9 +67,6 @@ public class Zadanie2_steps {
     @FindBy(css = "#history-link")
     WebElement orderDetails;
 
-
-    //YOUR ORDER IS CONFIRMED
-
     public void addToCart() {
         myStoreLogo.click();
 
@@ -94,36 +79,21 @@ public class Zadanie2_steps {
 
         try {
             quantity.clear();
-            quantity.sendKeys("2");
+            quantity.sendKeys("5");
         } catch (StaleElementReferenceException e) {
             System.out.println("exception");
         }
 
         addToCartButton.click();
+    }
+
+    public void placeAnOrder() {
+
+        proceedToCheckoutButton.click();
 
         checkoutButton.click();
-    }
-
-    public void addAddress() {
-
-        checkout2.click();
-
-        addressInput.sendKeys("Street");
-
-        postalCodeInput.sendKeys("00000");
-
-        cityInput.sendKeys("City");
-
-        Select countrySelect = new Select(driver.findElement(By.name("id_country")));
-        countrySelect.selectByIndex(1);
-
-        phoneInput.sendKeys("8888888888");
 
         confirmAddressButton.click();
-
-    }
-
-    public void orderPlacement() {
 
         confirmDeliveryButton.click();
 

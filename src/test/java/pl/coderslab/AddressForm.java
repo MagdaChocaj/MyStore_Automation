@@ -8,10 +8,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class PageObject {
+public class AddressForm {
     private WebDriver driver;
 
-    public PageObject(WebDriver driver) {
+    public AddressForm(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -28,22 +28,22 @@ public class PageObject {
     @FindBy(css = "#submit-login")
     WebElement submitButton;
 
-    @FindBy(id = "address-link")
-    WebElement addAddressButton;
-
-    @FindBy(css = "#wrapper > div > nav > ol > li:nth-child(3) > a")
+    @FindBy(id = "addresses-link")
     WebElement addressesButton;
 
     @FindBy(css = "#content > div.addresses-footer > a")
     WebElement createNewAddressButton;
 
-    @FindBy(name ="address1")
+    @FindBy(xpath = "//*[@id=\"content\"]/div/div/form/section/div[1]/div[1]/input")
+    WebElement aliasInput;
+
+    @FindBy(xpath ="/html/body/main/section/div/div/section/section/div/div/form/section/div[6]/div[1]/input")
     WebElement addressInput;
 
     @FindBy (name = "postcode")
     WebElement postalCodeInput;
 
-    @FindBy(name = "city")
+    @FindBy(xpath = "/html/body/main/section/div/div/section/section/div/div/form/section/div[8]/div[1]/input")
     WebElement cityInput;
 
     @FindBy(name = "phone")
@@ -55,7 +55,7 @@ public class PageObject {
     @FindBy(css = "#notifications > div > article")
     WebElement successInformation;
 
-    @FindBy (xpath = "/html/body/main/section/div/div/section/section/div[1]/article/div[2]/a[2]")
+    @FindBy (xpath = "/html/body/main/section/div/div/section/section/div[2]/article/div[2]/a[2]")
     WebElement deleteButton;
 
     @FindBy(css = "#notifications > div > article")
@@ -73,14 +73,15 @@ public class PageObject {
         submitButton.click();
     }
 
-    public void addAddress() {
+    public void openNewAddressForm() {
 
-        addAddressButton.click();
         addressesButton.click();
         createNewAddressButton.click();
     }
 
-    public void createNewAddress(String address, String city, String postalCode, String phoneNumber) {
+    public void createNewAddress(String alias, String address, String city, String postalCode, String phoneNumber) {
+
+        aliasInput.sendKeys(alias);
 
         addressInput.sendKeys(address);
 
@@ -100,6 +101,7 @@ public class PageObject {
         try {
             saveButton.click();
         } catch (StaleElementReferenceException e) {
+            System.out.println("Exception caught");
 
         }
 

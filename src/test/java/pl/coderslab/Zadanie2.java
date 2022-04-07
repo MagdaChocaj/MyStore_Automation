@@ -9,8 +9,8 @@ import java.time.Duration;
 
 public class Zadanie2 {
     WebDriver driver;
-    PageObject pageObject;
-    Zadanie2_steps element;
+    AddressForm addressForm;
+    OrderPlacement newOrder;
 
     @BeforeEach
     public void beforeEach() {
@@ -22,15 +22,14 @@ public class Zadanie2 {
     }
 
     @Test
-    public void userIsSignedIn() {
-        pageObject = new PageObject(driver);
-        element = new Zadanie2_steps(driver);
-        pageObject.login();
-        element.addToCart();
-        element.addAddress();
-        element.orderPlacement();
-        element.takeAScreenshot();
-        element.orderStatus();
+    public void shouldPlaceAnOrder() {
+        addressForm = new AddressForm(driver);
+        newOrder = new OrderPlacement(driver);
+        addressForm.login();
+        newOrder.addToCart();
+        newOrder.placeAnOrder();
+        newOrder.takeAScreenshot();
+        newOrder.orderStatus();
 
 
 

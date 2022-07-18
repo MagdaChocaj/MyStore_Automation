@@ -45,7 +45,6 @@ public class Zadanie1_steps {
 
     @Then("{string} is displayed")
     public void userSees(String message) {
-        message = "Address successfully added!";
         Assertions.assertTrue(addressForm.getSuccessInfo().equals(message));
 
     }
@@ -57,7 +56,6 @@ public class Zadanie1_steps {
     }
     @And("user sees {string}")
     public void deletionMessage(String message){
-        message = "Address successfully deleted!";
         Assertions.assertTrue(addressForm.getDeletionInfo().equals(message));
     }
 }

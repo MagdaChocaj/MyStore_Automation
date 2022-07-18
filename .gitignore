@@ -2,4 +2,4 @@
 /target/
 .idea/
 resources/
-out
+/out

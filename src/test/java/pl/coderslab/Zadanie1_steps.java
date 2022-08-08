@@ -3,27 +3,26 @@ package pl.coderslab;
 import io.cucumber.java.en.*;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.edge.EdgeDriver;
+import pl.coderslab.pages.AddressForm;
+import pl.coderslab.pages.LoginPage;
+import pl.coderslab.pages.Verify;
+import static pl.coderslab.driver.DriverFactory.getEdgeDriver;
 
-import java.time.Duration;
+public class Zadanie1_steps extends BaseTest {
 
-public class Zadanie1_steps {
-    WebDriver driver;
-    AddressForm addressForm;
+    WebDriver driver = getEdgeDriver();
+    AddressForm addressForm = new AddressForm(driver);
+    Verify verify = new Verify(driver);
+    LoginPage login = new LoginPage(driver);
 
     @Given("opened myStore webpage")
     public void beforeEach() {
-        System.setProperty("webdriver.edge.driver", "src/test/resources/msedgedriver.exe");
-        this.driver = new EdgeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(16));
-        driver.manage().window().maximize();
-        driver.get("https://mystore-testlab.coderslab.pl/index.php");
+        setup();
     }
 
     @When("user is signed in")
     public void userIsSignedIn() {
-        addressForm = new AddressForm(driver);
-        addressForm.login();
+        login.login();
     }
 
     @And("address form is opened")
@@ -45,7 +44,7 @@ public class Zadanie1_steps {
 
     @Then("{string} is displayed")
     public void userSees(String message) {
-        Assertions.assertTrue(addressForm.getSuccessInfo().equals(message));
+        Assertions.assertTrue(verify.successInfo().equals(message));
 
     }
 
@@ -56,7 +55,7 @@ public class Zadanie1_steps {
     }
     @And("user sees {string}")
     public void deletionMessage(String message){
-        Assertions.assertTrue(addressForm.getDeletionInfo().equals(message));
+        Assertions.assertTrue(verify.deletionInfo().equals(message));
     }
 }
 

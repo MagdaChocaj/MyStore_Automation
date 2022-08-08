@@ -10,5 +10,4 @@ import org.junit.runner.RunWith;
 
 public class Zadanie1_test {
 
-
 }

@@ -1,32 +1,18 @@
-package pl.coderslab;
+package pl.coderslab.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import pl.coderslab.pageobject.PageObject;
 
-public class AddressForm {
-    private WebDriver driver;
+import static pl.coderslab.driver.DriverFactory.getEdgeDriver;
 
-    public AddressForm(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
+public class AddressForm extends PageObject {
 
-    @FindBy(css = "#_desktop_user_info > div > a")
-    WebElement signInButton;
-
-    @FindBy(css = "#login-form > section > div:nth-child(2) > div.col-md-6 > input")
-    WebElement emailInput;
-
-    @FindBy(css = "#login-form > section > div:nth-child(3) > div.col-md-6 > div > input")
-    WebElement passwordInput;
-
-    @FindBy(css = "#submit-login")
-    WebElement submitButton;
+    WebDriver driver = getEdgeDriver();
 
     @FindBy(id = "addresses-link")
     WebElement addressesButton;
@@ -52,25 +38,11 @@ public class AddressForm {
     @FindBy (css = "#content > div > div > form > footer > button")
     WebElement saveButton;
 
-    @FindBy(css = "#notifications > div > article")
-    WebElement successInformation;
-
     @FindBy (xpath = "/html/body/main/section/div/div/section/section/div[2]/article/div[2]/a[2]")
     WebElement deleteButton;
 
-    @FindBy(css = "#notifications > div > article")
-    WebElement deletionSuccessInfo;
-
-
-    public void login() {
-
-        signInButton.click();
-
-        emailInput.sendKeys("randomEmail@gmail.com");
-
-        passwordInput.sendKeys("Mypassword123");
-
-        submitButton.click();
+    public AddressForm(WebDriver driver) {
+        super(driver);
     }
 
     public void openNewAddressForm() {
@@ -106,14 +78,9 @@ public class AddressForm {
         }
 
     }
-    public String getSuccessInfo() {
-        return successInformation.getText();
-    }
 
     public void deleteAddress() {
         deleteButton.click();
     }
-    public String getDeletionInfo(){
-        return deletionSuccessInfo.getText();
-    }
+
 }

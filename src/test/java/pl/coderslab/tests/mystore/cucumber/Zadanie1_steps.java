@@ -1,12 +1,14 @@
-package pl.coderslab;
+package pl.coderslab.tests.mystore.cucumber;
 
 import io.cucumber.java.en.*;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
-import pl.coderslab.pages.AddressForm;
-import pl.coderslab.pages.LoginPage;
-import pl.coderslab.pages.Verify;
-import static pl.coderslab.driver.DriverFactory.getEdgeDriver;
+import pl.coderslab.tests.BaseTest;
+import pl.coderslab.main.pages.AddressForm;
+import pl.coderslab.main.pages.LoginPage;
+import pl.coderslab.tests.Verify;
+
+import static pl.coderslab.main.driver.DriverFactory.getEdgeDriver;
 
 public class Zadanie1_steps extends BaseTest {
 

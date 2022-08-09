@@ -1,4 +1,4 @@
-package pl.coderslab.pageobject;
+package pl.coderslab.main.pageobject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;

@@ -1,4 +1,4 @@
-package pl.coderslab.driver;
+package pl.coderslab.main.driver;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

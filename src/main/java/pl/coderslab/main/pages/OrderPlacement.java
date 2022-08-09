@@ -1,20 +1,18 @@
-package pl.coderslab.pages;
+package pl.coderslab.main.pages;
 
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import pl.coderslab.pageobject.PageObject;
+import pl.coderslab.main.driver.DriverFactory;
+import pl.coderslab.main.pageobject.PageObject;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static pl.coderslab.driver.DriverFactory.getEdgeDriver;
-
 public class OrderPlacement extends PageObject {
-    WebDriver driver = getEdgeDriver();
+    WebDriver driver = DriverFactory.getEdgeDriver();
 
     public OrderPlacement(WebDriver driver) {
         super(driver);
@@ -25,9 +23,6 @@ public class OrderPlacement extends PageObject {
 
     @FindBy(css = ".thumbnail-container > a[href*=\"rewrite=brown-bear-printed-sweater\"]")
     WebElement hummingbirdPrintedSweater;
-
-    @FindBy(css = ".discount-percentage")
-    WebElement discount;
 
     @FindBy(css = "#quantity_wanted")
     WebElement quantity;
@@ -56,12 +51,14 @@ public class OrderPlacement extends PageObject {
     @FindBy(css = "#payment-confirmation > div.ps-shown-by-js > button")
     WebElement paymentConfirmation;
 
-    public OrderPlacement addToCart() {
-
+    public OrderPlacement pickAProduct(){
         myStoreLogo.click();
         hummingbirdPrintedSweater.click();
 
-        Assertions.assertEquals("SAVE 20%", discount.getText());
+        return this;
+    }
+
+    public OrderPlacement addToCart() {
 
         Select size = new Select(driver.findElement(By.id("group_1")));
         size.selectByValue("2");

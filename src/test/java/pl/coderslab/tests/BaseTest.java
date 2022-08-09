@@ -1,16 +1,16 @@
-package pl.coderslab;
+package pl.coderslab.tests;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static pl.coderslab.driver.DriverFactory.getEdgeDriver;
-import static pl.coderslab.driver.DriverFactory.getWebDriverWait;
+import static pl.coderslab.main.driver.DriverFactory.getEdgeDriver;
+import static pl.coderslab.main.driver.DriverFactory.getWebDriverWait;
 
 public class BaseTest {
-    static WebDriver driver;
-    static WebDriverWait wait;
+    protected static WebDriver driver;
+    protected static WebDriverWait wait;
     public static final String BASE_URL = "https://mystore-testlab.coderslab.pl/index.php";
 
     @BeforeAll

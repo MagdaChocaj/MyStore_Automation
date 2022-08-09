@@ -1,9 +1,9 @@
-package pl.coderslab.pages;
+package pl.coderslab.main.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pl.coderslab.pageobject.PageObject;
+import pl.coderslab.main.pageobject.PageObject;
 
 public class LoginPage extends PageObject {
 

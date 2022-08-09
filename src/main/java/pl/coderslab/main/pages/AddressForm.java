@@ -1,4 +1,4 @@
-package pl.coderslab.pages;
+package pl.coderslab.main.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -6,13 +6,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import pl.coderslab.pageobject.PageObject;
-
-import static pl.coderslab.driver.DriverFactory.getEdgeDriver;
+import pl.coderslab.main.driver.DriverFactory;
+import pl.coderslab.main.pageobject.PageObject;
 
 public class AddressForm extends PageObject {
 
-    WebDriver driver = getEdgeDriver();
+    WebDriver driver = DriverFactory.getEdgeDriver();
 
     @FindBy(id = "addresses-link")
     WebElement addressesButton;

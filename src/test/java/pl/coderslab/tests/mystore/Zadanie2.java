@@ -1,9 +1,10 @@
-package pl.coderslab;
+package pl.coderslab.tests.mystore;
 
 import org.junit.jupiter.api.Test;
-import pl.coderslab.pages.LoginPage;
-import pl.coderslab.pages.OrderPlacement;
-import pl.coderslab.pages.Verify;
+import pl.coderslab.main.pages.LoginPage;
+import pl.coderslab.main.pages.OrderPlacement;
+import pl.coderslab.tests.Verify;
+import pl.coderslab.tests.BaseTest;
 
 public class Zadanie2 extends BaseTest {
 
@@ -14,6 +15,8 @@ public class Zadanie2 extends BaseTest {
     @Test
     public void shouldPlaceAnOrder() {
         login.login();
+        newOrder.pickAProduct();
+        verify.discount();
         newOrder.addToCart()
                 .placeAnOrder()
                 .takeAScreenshot();

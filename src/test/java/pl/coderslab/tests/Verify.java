@@ -1,10 +1,10 @@
-package pl.coderslab.pages;
+package pl.coderslab.tests;
 
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pl.coderslab.pageobject.PageObject;
+import pl.coderslab.main.pageobject.PageObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,9 @@ import java.util.List;
 public class Verify extends PageObject {
 
     private List<String> priceList = new ArrayList<>();
+
+    @FindBy(css = ".discount-percentage")
+    WebElement discount;
 
     @FindBy(css = "#notifications > div > article")
     WebElement successInformation;
@@ -43,6 +46,11 @@ public class Verify extends PageObject {
     }
     public String deletionInfo(){
         return deletionSuccessInfo.getText();
+    }
+
+    public Verify discount(){
+        Assertions.assertEquals("SAVE 20%", discount.getText());
+        return this;
     }
 
     public Verify orderStatus() {
